@@ -1,0 +1,184 @@
+const fs = require("fs");
+const path = require("path");
+const { prompt } = require("inquirer");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const DIST_DIR = path.resolve(__dirname, "dist");
+const distPath = path.join(DIST_DIR, "team.html");
+const companyTeam = [];
+
+// const generatePage = require(".src/page-template");
+
+function buildTeam() {
+	//Create a manager entry
+	function promptManager() {
+		console.log(`Let's build a team! We'll start with the manager:`);
+		return prompt([
+			{
+				type: "input",
+				name: "teamManager",
+				message: "What is the Team Manager's name? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please enter the Team Manager's name.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "id",
+				message: "What is the employee's id? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the employee's id.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "email",
+				message: "What is the employee's email? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the employee's email.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "officeNumber",
+				message: "What is the Manager's office number? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the Manager's office number.");
+						return false;
+					}
+				},
+			},
+		]).then((answers) => {
+			console.log(answers);
+			const manager = new Manager(
+				answers.teamManager,
+				answers.id,
+				answers.email,
+				answers.officeNumber
+			);
+			companyTeam.push(manager);
+			teamMember();
+		});
+	}
+	//choose Engineer or Intern employee
+	function teamMember() {
+		console.log(`Great! Let's add a team member!`);
+		return prompt([
+			{
+				type: "list",
+				name: "employeeType",
+				message: "What team member would you like to add?",
+				choices: ["Engineer", "Intern", "Finished adding team members"],
+			},
+		]);
+	}
+
+	//Create an engineer object
+	function promptEngineer() {
+		console.log(`Let's add an Engineer to your team!`);
+		return prompt([
+			{
+				type: "input",
+				name: "name",
+				message: "What is the Employee's name? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please enter the Employee's name.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "id",
+				message: "What is the Employee's ID? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the Employee's ID.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "email",
+				message: "What is the Employee's email? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the Employee's email.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "gitHub",
+				message: "What is the Engineer's gitHub username? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the Engineer's gitHub username.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "confirm",
+				name: "confirmAddEmployee",
+				message: "Would you like to enter another Employee?",
+				default: false,
+			},
+		]).then((answers) => {
+			console.log(answers);
+			const manager = new Manager(
+				answers.teamManager,
+				answers.id,
+				answers.email,
+				answers.officeNumber
+			);
+			companyTeam.push(manager);
+			teamMember();
+		});
+	}
+	promptManager();
+	promptEngineer();
+	promptIntern();
+}
+buildTeam();
+
+//Create a function to write html
+
+//to do: Create a function to initialize app
+// async function init() {
+// await writeToFile(fileName, data);
+
+// }
+
+//function call to initialize app
+// init();
