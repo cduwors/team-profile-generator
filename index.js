@@ -239,6 +239,7 @@ function buildTeam() {
 				name: "confirmAddEmployee",
 				message: "Would you like to enter another Employee?",
 				default: false,
+				
 			},
 		]).then((answers) => {
 			console.log(answers);
@@ -253,18 +254,9 @@ function buildTeam() {
 		});
 	}
 	promptManager();
-	promptEngineer();
-	promptIntern();
+	// promptEngineer();
+	// promptIntern();
 }
 buildTeam();
 
 //Create a function to write html
-
-//to do: Create a function to initialize app
-// async function init() {
-// await writeToFile(fileName, data);
-
-// }
-
-//function call to initialize app
-// init();
