@@ -7,10 +7,9 @@ const Intern = require("./lib/Intern");
 const DIST_DIR = path.resolve(__dirname, "dist");
 const distPath = path.join(DIST_DIR, "team.html");
 const companyTeam = [];
+const generateHtml = require(".src/page-template");
 
-// const generatePage = require(".src/page-template");
-
-function buildTeam() {
+function enterTeam() {
 	//Create a manager entry
 	function promptManager() {
 		console.log(`Let's build a team! We'll start with the manager:`);
@@ -239,7 +238,6 @@ function buildTeam() {
 				name: "confirmAddEmployee",
 				message: "Would you like to enter another Employee?",
 				default: false,
-				
 			},
 		]).then((answers) => {
 			console.log(answers);
@@ -253,10 +251,14 @@ function buildTeam() {
 			teamMember();
 		});
 	}
-	promptManager();
-	// promptEngineer();
-	// promptIntern();
-}
-buildTeam();
 
-//Create a function to write html
+	function generateHtml() {
+		//creating output directory if doesn't already exist
+		if (!fs.existsSync(DIST_DIR)) {
+			fs.mkdirSync(DIST_DIR);
+		}
+		fs.writeFileSync(distPath, render(companyTeam), "utf-8");
+	}
+	promptManager();
+}
+enterTeam();
