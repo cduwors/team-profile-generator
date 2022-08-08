@@ -89,7 +89,18 @@ function buildTeam() {
 				message: "What team member would you like to add?",
 				choices: ["Engineer", "Intern", "Finished adding team members"],
 			},
-		]);
+		]).then((userChoice) => {
+			switch (userChoice.employeeType) {
+				case "Engineer":
+					promptEngineer();
+					break;
+				case "Intern":
+					promptIntern();
+					break;
+				default:
+					buildTeam();
+			}
+		});
 	}
 
 	//Create an engineer object
@@ -98,8 +109,8 @@ function buildTeam() {
 		return prompt([
 			{
 				type: "input",
-				name: "name",
-				message: "What is the Employee's name? (Required)",
+				name: "engineerName",
+				message: "What is the Engineer's name? (Required)",
 				validate: (answer) => {
 					if (answer) {
 						return true;
@@ -111,33 +122,33 @@ function buildTeam() {
 			},
 			{
 				type: "input",
-				name: "id",
-				message: "What is the Employee's ID? (Required)",
+				name: "engineerId",
+				message: "What is the Engineer's ID? (Required)",
 				validate: (answer) => {
 					if (answer) {
 						return true;
 					} else {
-						console.log("Please type the Employee's ID.");
+						console.log("Please type the Engineer's ID.");
 						return false;
 					}
 				},
 			},
 			{
 				type: "input",
-				name: "email",
-				message: "What is the Employee's email? (Required)",
+				name: "engineerEmail",
+				message: "What is the Engineer's email? (Required)",
 				validate: (answer) => {
 					if (answer) {
 						return true;
 					} else {
-						console.log("Please type the Employee's email.");
+						console.log("Please type the Engineer's email.");
 						return false;
 					}
 				},
 			},
 			{
 				type: "input",
-				name: "gitHub",
+				name: "engineerGithub",
 				message: "What is the Engineer's gitHub username? (Required)",
 				validate: (answer) => {
 					if (answer) {
@@ -156,13 +167,88 @@ function buildTeam() {
 			},
 		]).then((answers) => {
 			console.log(answers);
-			const manager = new Manager(
-				answers.teamManager,
-				answers.id,
-				answers.email,
-				answers.officeNumber
+			const engineer = new Engineer(
+				answers.engineerName,
+				answers.engineerId,
+				answers.engineerEmail,
+				answers.engineerGithub
 			);
-			companyTeam.push(manager);
+			companyTeam.push(engineer);
+			teamMember();
+		});
+	}
+
+	//create Intern object
+	function promptIntern() {
+		console.log(`Let's add an Intern to your team!`);
+		return prompt([
+			{
+				type: "input",
+				name: "internName",
+				message: "What is the Intern's name? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please enter the Intern's name.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "internId",
+				message: "What is the Intern's ID? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the Intern's ID.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "internEmail",
+				message: "What is the Intern's email? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the Intern's email.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "internSchool",
+				message: "What is the Intern's school? (Required)",
+				validate: (answer) => {
+					if (answer) {
+						return true;
+					} else {
+						console.log("Please type the Intern's school.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "confirm",
+				name: "confirmAddEmployee",
+				message: "Would you like to enter another Employee?",
+				default: false,
+			},
+		]).then((answers) => {
+			console.log(answers);
+			const intern = new Engineer(
+				answers.internName,
+				answers.internId,
+				answers.internEmail,
+				answers.internSchool
+			);
+			companyTeam.push(intern);
 			teamMember();
 		});
 	}
