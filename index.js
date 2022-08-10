@@ -260,7 +260,7 @@ function enterTeam() {
 	}
 
 	function buildTeam() {
-		console.log("ready to generate page");
+		console.log("Ready to generate page!");
 		// creating output directory if doesn't already exist
 		if (!fs.existsSync(DIST_DIR)) {
 			fs.mkdirSync(DIST_DIR);
@@ -270,73 +270,83 @@ function enterTeam() {
 			distPath,
 			`
 
-		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-		  <meta charset="UTF-8">
-		  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-		  <title>Team Generator</title>
-
-		</head>
-		
-		<body>
-		  <header>
-			<div class="container align-center py-3">
-			  <h1 class="page-title bg-danger text-white py-2 px-3">c</h1>
-			</div>
-		  </header>
-		  <main class="container my-5">
+			<!DOCTYPE html>
+			<html lang="en">
+				<head>
+					<meta charset="UTF-8" />
+					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+					<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+					<link
+						rel="stylesheet"
+						href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+						integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+						crossorigin="anonymous"
+					/>
+					<title>Team Generator</title>
+				</head>
+			
+				<body>
+					<header>
+						<div class="container bg-danger text-center p-2">
+							<h1 class="page-title text-white justify-content-center">My Team</h1>
+						</div>
+					</header>
+					<main class="container row d-flex px-5 m-5">
 		  `
 			// for loop to append all team members as cards
 		);
 		for (let i = 0; i < companyTeam.length; i++) {
-			if (companyTeam[i].getRole() === "Manager") {
-				fs.appendFileSync(
-					distPath,
-					`
-		<section>
-			<div class="card">
-				<div class="card-header bg-primary">
-				  	<h2 class="card-title text-white>${data.teamManager}</h2>
-				  	<h3 class="card-title text-white>${getRole(data)}</h2>
-				</div>
-				<div class="card-body bg-light">
-				  <ul class="list-group list-group-flush">
-					<li class="list-group-item">ID: ${data.id}</li>
-					<li class="list-group-item">Email: <a href="mailto:${data.email}>${
-						data.email
-					}>/a></li>
-					<li class="list-group-item">Office Number: ${data.officeNumber}</li>
-				  </ul>
-				</div>  
-			</div>
-		</section>
-			  
-
-			  `
-				);
-			} else if (companyTeam[i].getRole() === "Engineer") {
+			let data = companyTeam[i];
+			if (data.getRole() === "Manager") {
 				fs.appendFileSync(
 					distPath,
 					`
 					<section>
-					<div class="card">
+					<div class="card d-flex shadow p-2 m-2">
 						<div class="card-header bg-primary">
-							  <h2 class="card-title text-white>${data.engineerName}</h2>
-							  <h3 class="card-title text-white>${getRole(data)}</h2>
+							<h2 class="card-title text-white">${data.teamManager}</h2>
+							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
 						<div class="card-body bg-light">
-						  <ul class="list-group list-group-flush">
-							<li class="list-group-item">ID: ${data.engineerId}</li>
-							<li class="list-group-item">Email: <a href="mailto:${data.engineerEmail}>${
-						data.engineerEmail
-					}>/a></li>
-							<li class="list-group-item">Github: <a href="mailto:https://www.github.com/${
-								data.engineerGithub
-							}>${data.engineerGithub}>/a></li>
-						  </ul>
-						</div>  
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">ID: ${data.id}</li>
+								<li class="list-group-item">
+									Email:
+									<a href="${data.email}"
+										>${data.email}</a
+									>
+								</li>
+								<li class="list-group-item">Office Number: ${data.officeNumber}</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			  `
+				);
+			} else if (data.getRole() === "Engineer") {
+				fs.appendFileSync(
+					distPath,
+					`
+					<section>
+					<div class="card d-flex shadow p-2 m-2">
+						<div class="card-header bg-primary">
+							<h2 class="card-title text-white">${data.engineerName}</h2>
+							<h3 class="card-title text-white">${data.getRole()}</h3>
+						</div>
+						<div class="card-body bg-light">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">ID: ${data.engineerId}</li>
+								<li class="list-group-item">
+									Email:
+									<a href="${data.engineerEmail}"
+										>${data.engineerEmail}</a
+									>
+								</li>
+								<li class="list-group-item">Github: <a href="mailto:https://www.github.com/${
+									data.engineerGithub
+								}>"${data.engineerGithub}>/a></li>
+							</ul>
+						</div>
 					</div>
 				</section>
 			`
@@ -347,22 +357,24 @@ function enterTeam() {
 					//enter intern html
 					`
 					<section>
-					<div class="card">
+					<div class="card d-flex shadow p-2 m-2">
 						<div class="card-header bg-primary">
-							  <h2 class="card-title text-white>${data.internName}</h2>
-							  <h3 class="card-title text-white>${getRole(data)}</h2>
+							<h2 class="card-title text-white">${data.internName}</h2>
+							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
 						<div class="card-body bg-light">
-						  <ul class="list-group list-group-flush">
-							<li class="list-group-item">ID: ${data.internId}</li>
-							<li class="list-group-item">Email: <a href="mailto:${data.internEmail}>${
-						data.email
-					}>/a></li>
-							<li class="list-group-item">School: ${data.internSchool}</li>
-						  </ul>
-						</div>  
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">ID: ${data.internId}</li>
+								<li class="list-group-item">
+									Email:
+									<a href="${data.internEmail}"
+										>${data.internEmail}</a
+									>
+								</li>
+								<li class="list-group-item">School: ${data.internSchool}</li>
+							</ul>
+						</div>
 					</div>
-				</section>
 				`
 				);
 			}
