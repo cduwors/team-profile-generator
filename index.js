@@ -7,7 +7,6 @@ const Intern = require("./lib/Intern");
 const DIST_DIR = path.resolve(__dirname, "dist");
 const distPath = path.join(DIST_DIR, "team.html");
 const companyTeam = [];
-const generateHtml = require(".src/page-template");
 
 function enterTeam() {
 	//Create a manager entry
@@ -173,7 +172,11 @@ function enterTeam() {
 				answers.engineerGithub
 			);
 			companyTeam.push(engineer);
-			teamMember();
+			if (answers.confirmAddEmployee) {
+				teamMember();
+			} else {
+				buildTeam();
+			}
 		});
 	}
 
@@ -241,23 +244,136 @@ function enterTeam() {
 			},
 		]).then((answers) => {
 			console.log(answers);
-			const intern = new Engineer(
+			const intern = new Intern(
 				answers.internName,
 				answers.internId,
 				answers.internEmail,
 				answers.internSchool
 			);
 			companyTeam.push(intern);
-			teamMember();
+			if (answers.confirmAddEmployee) {
+				teamMember();
+			} else {
+				buildTeam();
+			}
 		});
 	}
 
-	function generateHtml() {
-		//creating output directory if doesn't already exist
+	function buildTeam() {
+		console.log("ready to generate page");
+		// creating output directory if doesn't already exist
 		if (!fs.existsSync(DIST_DIR)) {
 			fs.mkdirSync(DIST_DIR);
 		}
-		fs.writeFileSync(distPath, render(companyTeam), "utf-8");
+		// fs.writeFileSync(distPath, "utf-8");
+		fs.writeFileSync(
+			distPath,
+			`
+
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+		  <meta charset="UTF-8">
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+		  <title>Team Generator</title>
+
+		</head>
+		
+		<body>
+		  <header>
+			<div class="container align-center py-3">
+			  <h1 class="page-title bg-danger text-white py-2 px-3">c</h1>
+			</div>
+		  </header>
+		  <main class="container my-5">
+		  `
+			// for loop to append all team members as cards
+		);
+		for (let i = 0; i < companyTeam.length; i++) {
+			if (companyTeam[i].getRole() === "Manager") {
+				fs.appendFileSync(
+					distPath,
+					`
+		<section>
+			<div class="card">
+				<div class="card-header bg-primary">
+				  	<h2 class="card-title text-white>${data.teamManager}</h2>
+				  	<h3 class="card-title text-white>${getRole(data)}</h2>
+				</div>
+				<div class="card-body bg-light">
+				  <ul class="list-group list-group-flush">
+					<li class="list-group-item">ID: ${data.id}</li>
+					<li class="list-group-item">Email: <a href="mailto:${data.email}>${
+						data.email
+					}>/a></li>
+					<li class="list-group-item">Office Number: ${data.officeNumber}</li>
+				  </ul>
+				</div>  
+			</div>
+		</section>
+			  
+
+			  `
+				);
+			} else if (companyTeam[i].getRole() === "Engineer") {
+				fs.appendFileSync(
+					distPath,
+					`
+					<section>
+					<div class="card">
+						<div class="card-header bg-primary">
+							  <h2 class="card-title text-white>${data.engineerName}</h2>
+							  <h3 class="card-title text-white>${getRole(data)}</h2>
+						</div>
+						<div class="card-body bg-light">
+						  <ul class="list-group list-group-flush">
+							<li class="list-group-item">ID: ${data.engineerId}</li>
+							<li class="list-group-item">Email: <a href="mailto:${data.engineerEmail}>${
+						data.engineerEmail
+					}>/a></li>
+							<li class="list-group-item">Github: <a href="mailto:https://www.github.com/${
+								data.engineerGithub
+							}>${data.engineerGithub}>/a></li>
+						  </ul>
+						</div>  
+					</div>
+				</section>
+			`
+				);
+			} else {
+				fs.appendFileSync(
+					distPath,
+					//enter intern html
+					`
+					<section>
+					<div class="card">
+						<div class="card-header bg-primary">
+							  <h2 class="card-title text-white>${data.internName}</h2>
+							  <h3 class="card-title text-white>${getRole(data)}</h2>
+						</div>
+						<div class="card-body bg-light">
+						  <ul class="list-group list-group-flush">
+							<li class="list-group-item">ID: ${data.internId}</li>
+							<li class="list-group-item">Email: <a href="mailto:${data.internEmail}>${
+						data.email
+					}>/a></li>
+							<li class="list-group-item">School: ${data.internSchool}</li>
+						  </ul>
+						</div>  
+					</div>
+				</section>
+				`
+				);
+			}
+		}
+		// one last append to close the html
+		fs.appendFileSync(
+			distPath,
+			`</main>
+	  		</body>
+	  		</html>`
+		);
 	}
 	promptManager();
 }
