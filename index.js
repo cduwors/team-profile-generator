@@ -291,7 +291,7 @@ function enterTeam() {
 							<h1 class="page-title text-white justify-content-center">My Team</h1>
 						</div>
 					</header>
-					<main class="container row d-flex px-5 m-5">
+					<main class="container m-100 row d-flex flex-wrap justify-content-center px-5 m-5">
 		  `
 			// for loop to append all team members as cards
 		);
@@ -301,18 +301,18 @@ function enterTeam() {
 				fs.appendFileSync(
 					distPath,
 					`
-					<section>
-					<div class="card d-flex justify-content-center shadow p-2 m-2">
+				<section>
+					<div class="card border border-danger shadow p-2 m-2">
 						<div class="card-header bg-primary">
 							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
 						<div class="card-body bg-secondary">
-							<ul class="list-group list-group-flush">
+							<ul class="list-group list-group-flush border border-danger">
 								<li class="list-group-item">ID: ${data.id}</li>
 								<li class="list-group-item">
 									Email:
-									<a href="${data.email}"
+									<a href="mailto:${data.email}"
 										>${data.email}</a
 									>
 								</li>
@@ -327,16 +327,16 @@ function enterTeam() {
 				fs.appendFileSync(
 					distPath,
 					`
-					<section>
-					<div class="card d-flex justify-content-center  shadow p-2 m-2">
+				<section>
+					<div class="card border border-danger shadow p-2 m-2">
 						<div class="card-header bg-primary">
 							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
 						<div class="card-body bg-secondary">
-							<ul class="list-group list-group-flush">
+							<ul class="list-group list-group-flush border border-danger">
 								<li class="list-group-item">ID: ${data.id}</li>
-								<li class="list-group-item">Email: <a href="${data.email}">${
+								<li class="list-group-item">Email: <a href="mailto:${data.email}">${
 						data.email
 					}</a></li>
 								<li class="list-group-item">Github: <a href="https://www.github.com/${
@@ -354,24 +354,25 @@ function enterTeam() {
 					//enter intern html
 					`
 					<section>
-					<div class="card d-flex justify-content-center  shadow p-2 m-2">
-						<div class="card-header bg-primary">
-							<h2 class="card-title text-white">${data.name}</h2>
-							<h3 class="card-title text-white">${data.getRole()}</h3>
+					<div class="card border border-danger shadow p-2 m-2">
+							<div class="card-header bg-primary">
+								<h2 class="card-title text-white">${data.name}</h2>
+								<h3 class="card-title text-white">${data.getRole()}</h3>
+							</div>
+							<div class="card-body bg-secondary">
+								<ul class="list-group list-group-flush border border-danger">
+									<li class="list-group-item">ID: ${data.id}</li>
+									<li class="list-group-item">
+										Email:
+										<a href="mailto:${data.email}"
+											>${data.email}</a
+										>
+									</li>
+									<li class="list-group-item">School: ${data.school}</li>
+								</ul>
+							</div>
 						</div>
-						<div class="card-body bg-secondary">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">ID: ${data.id}</li>
-								<li class="list-group-item">
-									Email:
-									<a href="${data.email}"
-										>${data.email}</a
-									>
-								</li>
-								<li class="list-group-item">School: ${data.school}</li>
-							</ul>
-						</div>
-					</div>
+					</section>
 				`
 				);
 			}
