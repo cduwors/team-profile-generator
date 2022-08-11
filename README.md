@@ -12,7 +12,7 @@ A command line app that produces an html team page showing development team memb
 - [Contributing](#contributing)
 - [Tests](#tests)
 - [Questions](#questions)
-- [Image](#image)
+- [Screenshot](#screenshot)
 
 ## Installation
 
@@ -38,6 +38,6 @@ N/A
 
 See more details at https://www.github.com/cduwors or contact christinaduwors@gmail.com.
 
-## Image
+## Screenshot
 
-<img src= "./img/team-page.png"/>
+<img src= "./img/team-profile.png"/>
