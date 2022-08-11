@@ -2,7 +2,7 @@
 
 ## Description
 
-A command line app that produces an html team page showing development team members of Manager, Engineer, and Intern. Including identifying and contact information for each employee.
+A command line app that produces an html team page showing development team members of Manager, Engineer, and Intern. Including identifying and contact information for each employee. View a live demo here: https://drive.google.com/file/d/1Bsm5Ss_UfDPkkDcluiUVM7j_1YaufR6b/view.
 
 ## Table of Contents
 
