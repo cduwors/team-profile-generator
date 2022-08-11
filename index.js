@@ -287,7 +287,7 @@ function enterTeam() {
 			
 				<body>
 					<header>
-						<div class="container bg-danger text-center p-2">
+						<div class="container mw-100 bg-danger text-center m-2 p-5">
 							<h1 class="page-title text-white justify-content-center">My Team</h1>
 						</div>
 					</header>
@@ -307,7 +307,7 @@ function enterTeam() {
 							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
-						<div class="card-body bg-light">
+						<div class="card-body bg-secondary">
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">ID: ${data.id}</li>
 								<li class="list-group-item">
@@ -333,7 +333,7 @@ function enterTeam() {
 							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
-						<div class="card-body bg-light">
+						<div class="card-body bg-secondary">
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">ID: ${data.id}</li>
 								<li class="list-group-item">Email: <a href="${data.email}">${
@@ -359,7 +359,7 @@ function enterTeam() {
 							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
-						<div class="card-body bg-light">
+						<div class="card-body bg-secondary">
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">ID: ${data.id}</li>
 								<li class="list-group-item">
