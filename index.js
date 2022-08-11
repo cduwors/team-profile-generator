@@ -258,7 +258,7 @@ function enterTeam() {
 			}
 		});
 	}
-
+	console.log(companyTeam);
 	function buildTeam() {
 		console.log("Ready to generate page!");
 		// creating output directory if doesn't already exist
@@ -302,9 +302,9 @@ function enterTeam() {
 					distPath,
 					`
 					<section>
-					<div class="card d-flex shadow p-2 m-2">
+					<div class="card d-flex justify-content-center shadow p-2 m-2">
 						<div class="card-header bg-primary">
-							<h2 class="card-title text-white">${data.teamManager}</h2>
+							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
 						<div class="card-body bg-light">
@@ -328,23 +328,20 @@ function enterTeam() {
 					distPath,
 					`
 					<section>
-					<div class="card d-flex shadow p-2 m-2">
+					<div class="card d-flex justify-content-center  shadow p-2 m-2">
 						<div class="card-header bg-primary">
-							<h2 class="card-title text-white">${data.engineerName}</h2>
+							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
 						<div class="card-body bg-light">
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">ID: ${data.engineerId}</li>
-								<li class="list-group-item">
-									Email:
-									<a href="${data.engineerEmail}"
-										>${data.engineerEmail}</a
-									>
-								</li>
-								<li class="list-group-item">Github: <a href="mailto:https://www.github.com/${
-									data.engineerGithub
-								}>"${data.engineerGithub}>/a></li>
+								<li class="list-group-item">ID: ${data.id}</li>
+								<li class="list-group-item">Email: <a href="${data.email}">${
+						data.email
+					}</a></li>
+								<li class="list-group-item">Github: <a href="https://www.github.com/${
+									data.github
+								}">${data.github}>/a></li>
 							</ul>
 						</div>
 					</div>
@@ -357,21 +354,21 @@ function enterTeam() {
 					//enter intern html
 					`
 					<section>
-					<div class="card d-flex shadow p-2 m-2">
+					<div class="card d-flex justify-content-center  shadow p-2 m-2">
 						<div class="card-header bg-primary">
-							<h2 class="card-title text-white">${data.internName}</h2>
+							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
 						<div class="card-body bg-light">
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">ID: ${data.internId}</li>
+								<li class="list-group-item">ID: ${data.id}</li>
 								<li class="list-group-item">
 									Email:
-									<a href="${data.internEmail}"
-										>${data.internEmail}</a
+									<a href="${data.email}"
+										>${data.email}</a
 									>
 								</li>
-								<li class="list-group-item">School: ${data.internSchool}</li>
+								<li class="list-group-item">School: ${data.school}</li>
 							</ul>
 						</div>
 					</div>
@@ -386,6 +383,7 @@ function enterTeam() {
 	  		</body>
 	  		</html>`
 		);
+		console.log("Your team.html is complete! Look in the dist file to review!");
 	}
 	promptManager();
 }
