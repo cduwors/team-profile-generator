@@ -287,7 +287,7 @@ function enterTeam() {
 			
 				<body>
 					<header>
-						<div class="container mw-100 bg-danger text-center m-2 p-5">
+						<div class="container mw-100 bg-danger text-center p-5">
 							<h1 class="page-title text-white justify-content-center">My Team</h1>
 						</div>
 					</header>
@@ -303,7 +303,7 @@ function enterTeam() {
 					`
 				<section>
 					<div class="card border border-danger shadow p-2 m-2">
-						<div class="card-header bg-primary">
+						<div class="card-header bg-danger">
 							<h2 class="card-title text-white">${data.name}</h2>
 							<h3 class="card-title text-white">${data.getRole()}</h3>
 						</div>
@@ -355,7 +355,7 @@ function enterTeam() {
 					`
 					<section>
 					<div class="card border border-danger shadow p-2 m-2">
-							<div class="card-header bg-primary">
+							<div class="card-header bg-success">
 								<h2 class="card-title text-white">${data.name}</h2>
 								<h3 class="card-title text-white">${data.getRole()}</h3>
 							</div>
