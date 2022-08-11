@@ -341,7 +341,7 @@ function enterTeam() {
 					}</a></li>
 								<li class="list-group-item">Github: <a href="https://www.github.com/${
 									data.github
-								}">${data.github}>/a></li>
+								}">${data.github}</a></li>
 							</ul>
 						</div>
 					</div>
